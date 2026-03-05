@@ -134,45 +134,67 @@ export class Home implements AfterViewInit {
       });
     });
   }
-  private initTextAnimations(): void {
-    const headings = gsap.utils.toArray('.split-heading') as HTMLElement[];
+private initTextAnimations(): void {
+  // 1. Handle the solid white text (Split characters works fine here)
+  const whiteHeadings = gsap.utils.toArray('.split-heading') as HTMLElement[];
+  whiteHeadings.forEach((heading) => {
+    const split = new SplitText(heading, { type: 'chars' });
+    gsap.from(split.chars, {
+      scrollTrigger: {
+        trigger: heading,
+        start: 'top 85%',
+        toggleActions: 'play none none reverse',
+      },
+      y: 40,
+      autoAlpha: 0,
+      duration: 0.8,
+      stagger: 0.04,
+      ease: 'back.out(1.4)',
+    });
+  });
 
-    headings.forEach((heading) => {
-      const split = new SplitText(heading, { type: 'chars' });
-
-      gsap.from(split.chars, {
+  // 2. Handle the Gradient Text (NO SPLITTING - Use Clip-Path)
+  const gradientTexts = gsap.utils.toArray('.reveal-text') as HTMLElement[];
+  gradientTexts.forEach((text) => {
+    gsap.fromTo(text, 
+      { 
+        clipPath: 'inset(100% 0% 0% 0%)', // Hidden from bottom
+        y: 50,
+        opacity: 0 
+      },
+      {
         scrollTrigger: {
-          trigger: heading,
+          trigger: text,
           start: 'top 85%',
           toggleActions: 'play none none reverse',
         },
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.04,
-        ease: 'back.out(1.4)',
-      });
+        clipPath: 'inset(0% 0% 0% 0%)', // Revealed
+        y: 0,
+        opacity: 1,
+        duration: 1.2,
+        ease: 'power4.out',
+      }
+    );
+  });
+
+  // 3. Your existing body text logic (Lines work fine for gradients usually)
+  const bodyTexts = gsap.utils.toArray('.split-body') as HTMLElement[];
+  bodyTexts.forEach((body) => {
+    const split = new SplitText(body, { type: 'lines' });
+    gsap.from(split.lines, {
+      scrollTrigger: {
+        trigger: body,
+        start: 'top 90%',
+        toggleActions: 'play none none reverse',
+      },
+      y: 20,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: 'power3.out',
     });
-
-    const bodyTexts = gsap.utils.toArray('.split-body') as HTMLElement[];
-
-    bodyTexts.forEach((body) => {
-      const split = new SplitText(body, { type: 'lines' });
-
-      gsap.from(split.lines, {
-        scrollTrigger: {
-          trigger: body,
-          start: 'top 90%',
-          toggleActions: 'play none none reverse',
-        },
-        y: 20,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: 'power3.out',
-      });
-    });
-  }
+  });
+}
   private initMouseParallax(): void {
     if (!this.heroContainer) return;
 

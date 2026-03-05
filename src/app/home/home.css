@@ -8,27 +8,49 @@
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .no-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
+/* Fix for disappearing gradient text during GSAP transition */
 .split-heading {
-  padding-bottom: 0.1em;
+  display: inline-block;
+  -webkit-background-clip: text;
+  background-clip: text;
+  backface-visibility: hidden;
+}
+
+h2 .split-heading {
+  padding-right: 0.05em;
 }
 /* Highlights the active section icon in the dock */
 .active-nav {
   background-color: #22d3ee !important; /* Tailwind cyan-400 */
   color: #020617 !important; /* Tailwind slate-950 */
   box-shadow: 0 0 15px rgba(6, 182, 212, 0.5) !important;
-}   
+}
 @keyframes float-slow {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  50% { transform: translateY(-10px) translateX(5px); }
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-10px) translateX(5px);
+  }
 }
 
 @keyframes float-fast {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  50% { transform: translateY(8px) translateX(-5px); }
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(8px) translateX(-5px);
+  }
 }
 
-.animate-float-slow { animation: float-slow 4s ease-in-out infinite; }
-.animate-float-fast { animation: float-fast 3s ease-in-out infinite; }
+.animate-float-slow {
+  animation: float-slow 4s ease-in-out infinite;
+}
+.animate-float-fast {
+  animation: float-fast 3s ease-in-out infinite;
+}
