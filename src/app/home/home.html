@@ -91,11 +91,22 @@
         AI Student & Full-Stack Dev
       </p>
     </div>
-    <button
-      class="w-full bg-cyan-400 hover:bg-cyan-300 text-slate-950 text-sm font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-colors duration-300 uppercase tracking-widest"
-    >
-      Start Engine
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+   
+    <a
+        href="#"
+        (click)="openContactModal($event)"
+        class="group w-full bg-cyan-400 hover:bg-cyan-300 text-slate-950 text-sm font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-colors duration-300
+         uppercase tracking-widest relative px-8   backdrop-blur-md border border-cyan-400/50  overflow-hidden 
+            md:w-auto "
+      >
+        <div
+          class="absolute inset-0 bg-linear-to-r from-cyan-400/20 to-pink-500/20 -translate-x-full group-hover:translate-x-[0%] transition-transform duration-500 ease-out pointer-events-none"
+        ></div>
+        <span
+          class="relative z-10 font-bold tracking-widest uppercase text-sm group-hover:text-white transition-colors"
+          > Start Engine</span
+        >
+       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -103,7 +114,7 @@
           d="M14 5l7 7m0 0l-7 7m7-7H3"
         ></path>
       </svg>
-    </button>
+      </a>
   </div>
 
   <div
